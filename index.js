@@ -118,6 +118,9 @@ async function run(){
        })
 
 
+       
+
+
       //  google login user update only one user database store 
       app.put('/register', async(req,res)=>{
         const user=req.body;
@@ -264,6 +267,22 @@ app.post('/validate', async(req,res)=>{
   }
 })
 
+// token start
+
+app.get("/init",async(req,res)=>{
+  console.log(req.params.email)
+  const store=othersPaymentCollection.find({})
+  const result=await store.toArray()
+  // const result=await othersPaymentCollection.find(store).toArray()
+  res.send(result)
+
+})
+
+
+// token end 
+
+
+
 app.get('/orders/:tran_id', async(req,res)=>{
   const id=req.params.tran_id;
   const order =await othersPaymentCollection.findOne({tran_id:id});
@@ -339,6 +358,8 @@ app.get('/orders/:tran_id', async(req,res)=>{
       
     }
 
+
+    
 
     // bikash payment start
 
